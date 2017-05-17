@@ -1,0 +1,18 @@
+
+   M51A     Logic Design of Digital Systems     Richard Korf     Fall 2016
+
+	     Assignment 7 - Due Wednesday, November 16, 2 p.m.
+
+    DO NOT CONSULT ANY OUTSIDE REFERENCES OR WEBSITES FOR THIS PROBLEM
+
+ Design a sequential circuit to multiply two non-negative four-bit numbers
+ represented in standard binary.  Your circuit will have two four-bit inputs, a
+ single start input, a clock input, and an eight-bit output.  The start input
+ will normally be zero, and will initiate the multiplication operation by a
+ pulse to one.  You may assume that the start pulse is one clock wavelength
+ wide.  Approximately four clock pulses later, the product of the two inputs
+ should be available at the outputs, and remain available until the next
+ multiplication operation is initiated.  You must show all data paths and
+ control logic.  Use standard modules wherever possible and minimize the number
+ of discrete gates. Give a detailed description of how your circuit works.
+

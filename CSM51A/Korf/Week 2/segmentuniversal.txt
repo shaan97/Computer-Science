@@ -1,0 +1,33 @@
+
+   M51A     Logic Design of Digital Systems     Richard Korf     Fall 2016
+
+	      Assignment 2 - Due Wednesday, October 12, 2 p.m.
+
+ 1. Most inexpensive digital devices that display numbers, such as watches and
+ calculators, make use of a seven-segment display for each digit.  By
+ selectively turning on and turning off the different segments of the display,
+ any of the ten decimal digits can be displayed.  Internally, however, a digit
+ is represented in binary coded decimal (BCD).  A combinational circuit, called
+ a seven-segment decoder, is required to translate the BCD representation into
+ the seven segment representation for display.  There are four inputs to this
+ circuit, labelled w, x, y, z, corresponding to the four bits of the BCD
+ digit. w is the most significant digit, and z is the least significant digit.
+ There are seven outputs, labelled a, b, c, d, e, f, g, corresponding to the
+ seven segments of the display.  Generate a truth table that specifies which
+ segments are turned on, i.e. equal to one, in order to specify each decimal
+ digit.  The appearance of each digit, along with the labelling of the segments,
+ is given below.  For each output, draw a Karnaugh map.  From each Karnaugh map,
+ write both a minimal sum of products expression and a minimal product of sums
+ expression.  For clarity, draw two copies of the Karnaugh map for each output,
+ grouping the sum of product terms on one and the product of sum terms on the
+ other.  List the input literals in alphabetical order in your expressions.
+
+ 2. In addition to NAND and NOR, find four more two-input boolean functions that
+ are each individually universal.  Give a logic expression for each of your
+ functions, using AND, OR, and NOT, and prove that each of these functions is
+ individually universal, by showing that you can implement AND, OR, and NOT with
+ your function.  You may use the constant values zero and one as inputs to your
+ universal functions to implement other functions.  Name your functions f1, f2,
+ f3, and f4, and then use these names for the operator symbol.  i.e. "X f1 Y"
+ would signify applying the f1 function to X and Y.
+

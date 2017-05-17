@@ -1,0 +1,63 @@
+   M51A     Logic Design of Digital Systems     Richard Korf     Fall 2016
+
+	      Assignment 3 - Due Wednesday, October 19, 2 p.m.
+
+    DO NOT CONSULT ANY OUTSIDE REFERENCES OR WEBSITES FOR THIS PROBLEM SET
+ 
+ 1. Using NPN bipolar transistors (described in class), design circuits for an
+ AND gate, an OR gate, and a buffer gate.  A buffer is a one-input gate whose
+ output equals its input, and is used to amplify a logic signal.  Your AND and
+ OR gates may only use two transistors each, while the buffer may only use one.
+ You also may use a single resistor in each gate.  For each gate, indicate what
+ wired logic function would be performed if you connect the outputs of two of
+ the gates together.  In your gate designs, the output should always be pulled
+ either to ground or to the voltage source.
+
+ 2. A PNP bipolar transistor behaves similar to the NPN transistor described in
+ class, except that with no charge on the base, the circuit between emitter and
+ collector is closed, while with a positive charge on the base, the circuit
+ between emitter and collector is open.  Design circuits for an inverter,
+ buffer, AND, OR, NAND, and NOR gates using only PNP transistors.  The two-input
+ gates may only use two transistors each, while the one-input gates may only use
+ one transistor each.  In addition, you may use a single resistor in each gate.
+ The symbol for a PNP transistor has the little arrow on the collector pointing
+ toward the base instead of out of the transistor.  (On the NPN transistor, the
+ arrow is Not Pointing iN.)  For each gate, indicate what wired logic function
+ would be performed if you connect the outputs of two of the gates together.  In
+ your gate designs, the output should always be pulled either to ground or to
+ the voltage source.
+
+ 3. Using a combination of NPN and PNP bipolar transistors, design circuits for
+ exclusive-OR and equivalence gates.  The exclusive-OR function is one if and
+ only if exactly one of the inputs is one, but not both.  The equivalence
+ function is one if and only if both inputs have the same value.  Minimize the
+ number of transistors needed.  For each gate, indicate what wired logic
+ function would be performed if you connect the outputs of two of the gates
+ together.  In your gate designs, the output should always be pulled either to
+ ground or to the voltage source.
+
+ 4. Using CMOS transistors (NMOS and PMOS), design circuits for AND, OR, and
+ buffer gates.  You may use two transistors per input, but no resistors.  In
+ your gate designs, the output should always be pulled either to ground or to
+ the voltage source.
+
+ 5. The is no special relationship between digital logic and electronic
+ circuits.  Logic could also be implemented by other physical systems.  All that
+ is really required is a means of representing and transmitting signals, and a
+ switching device.  For example, water flowing in pipes could replace electrons
+ flowing in wires.  The logic convention we will use is that a one will be
+ represented by a pipe with a certain positive water pressure in it, and a zero
+ by no water pressure.  Design a water "transistor".  This would be a three pipe
+ device that behaves as follows: if there is no water pressure on the "base"
+ pipe, no water can flow between the "emitter" and "collector" pipes.
+ Conversely, if there is sufficient water pressure on the base, water can flow
+ between emitter and collector.  Give a sketch of your device, and a brief
+ explanation of how it works.  Strive for simplicity in your design.
+
+
+
+
+
+
+
+
