@@ -1,0 +1,64 @@
+Exercises
+
+5.)
+
+public class NumberFive {
+	public static void main(String[] args) {
+		System.out.println("A \"quoted\" String is");
+		System.out.println("'much' better if you learn");
+		System.out.println("the rules of \"escape sequences.\"");
+		System.out.println("Also, \"\" represents an empty String.");
+		System.out.println("Don't forget: use \\\" instead of \" !");
+		System.out.println("; ; is not the same as \"");
+	}
+}
+
+7.)
+
+public class Victory {
+	public static void main(String[] args) {
+		System.out.println("//////////////////////");
+		victory();
+		line();
+		victory();
+		line();
+		victory();
+		line();
+		victory();
+		line();
+		victory();
+		line();
+	}
+	public static void line() {
+		System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+	}
+	public static void victory() {
+		System.out.println("|| Victory is mine! ||");
+	}
+}
+
+10.)
+public class UnitedStates {
+	public static void main(String[] args) {
+		cone();
+		drawbox();
+		System.out.println("+------+    +------+");
+		System.out.println("|United|    |United|");
+		System.out.println("|States|    |States|");
+		System.out.println("+------+    +------+");
+		drawbox();
+		cone();
+	}
+	public static void drawbox() {
+		System.out.println("+------+    +------+");
+		System.out.println("|      |    |      |");
+		System.out.println("|      |    |      |");
+		System.out.println("+------+    +------+");
+	}
+	public static void cone() {
+		System.out.println("   /\\          /\\");
+		System.out.println("  /  \\        /  \\");
+		System.out.println(" /    \\      /    \\");
+	}
+
+}

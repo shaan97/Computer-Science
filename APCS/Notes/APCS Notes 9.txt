@@ -1,0 +1,293 @@
+Chapter 9: Inheritance and Polymorphism
+
+Superclass and Subclass
+	INHERITANCE is the mechanism whereby a new class, called a SUBCLASS, is created from an existing class, 
+	called a SUPERCLASS, by absorbing its state and behavior and augmenting these with features unique to the
+	new class.
+
+	We say that the subclass inherits characteristics of its superclass.
+
+	Do not get confused by the names:
+	a subclass is bigger than a superclass - it contains more data and more methods.
+
+	Inheritance provides an effective mechanism for code reuse.
+
+	Since a subclass object shares features of a superclass object, the only new code required is for the additional characteristics 
+	of the subclass.
+
+	A subclass can itself be a superclas for another subclass, leading to an INHERITANCE HIERARCHY of classes.
+					  Person
+				Student		   Employee
+			Undergrad	Grad	
+
+	For any of these classes, an arrow points to its superclass. The arrow designates the is-a relationship.
+
+	Thus, an employee is-a person, a gradStudent is-a student, and underGrad is-a student, etc...
+
+	Note that the is-a relationship is transitive. If gradStudent is-a student and a student is-a person, then GradStudent is also a person.
+
+	Notice that both the UnderGrad and GradStudent classes have their own implementation of the computeGrade() method. This is called method
+	overriding. If part of the original method implementation from the superclass is retained, we refer to this as partial overriding.
+
+Implementing Subclasses
+	The extends keyword
+		The relationship between a subclass and superclass is specified in the declaration fo the subclass, using the keyword extends.
+	
+	The general format for a subclass and superclass:
+		public class Superclass{
+			//private instance variables
+			//other data members
+			//constructors
+			//public methods
+			//private methods
+		}
+
+		public class Subclass extends Superclass{
+			//additional private instance variables
+			//additional data members
+			//constructors (not inherited!)
+			//additional public methods
+			//inherited public method whose implementation is overriden(exp. computeGrade)
+			//additional private methods
+		}
+
+Inheriting Instance Methods and Variables
+	Since Student instance variables myName, myTests, and myGrade are private they are not directly accessible to the methods in the 
+	underGrad and GradStudent subclasses.
+	
+	A subclass can, however, directly invoke the public accessor and mutator methods of the superclass.
+
+	If the private instance variables of the Student class were PROTECTED instead of private, then the subclasses could directly
+	access these variables.
+
+	classes on the same level in a hierarchy diagram do not inherit anything from each other.
+
+Method Overriding and the super keyword
+	A method in a superclass is overriden in a subclass by defining a method with the same return type and the same signature (name and paramter types).
+
+	Someitmes the code for overriding a method includes a call to the superclass method. This is called PARTIAL OVERRIDING. Typically this 
+	occurs when the subclassmethod wants to do what the superclass method does, plus something extra. This is achieved by using the keyword super, in the
+	implementation.
+
+Constructors and the super keyword
+	Constructors are never inherited! If no constructor is written for a subclass, the superclass default constructor with no parameters is generated. If
+	superclass does not have a default constructor (i.e. zero parameters), a compile error will occur. If there is a default constructor in the superclass
+	inherited
+	
+	Additional instances variables in the subclass will get a default initialization.
+
+A subclass constructor can be implemented with a call to the super() method, which invokes the superclass constructor. It must be called first.
+
+Note:
+	(1) If super is used in the implementation of a subclass constructor, it must be use in the first line of the constructor body.
+	(2) If no constructor is proided in a subclass, the compiler provides the following default constructor
+		public Subclass(){
+			super(); //calls default constructor of the Superclass
+		}
+	
+
+Rules for Subclasses
+	A subclass can add new private instance variables
+	Can add new public, private, or static methods
+	Can override inherited methods
+	May not redefine a public method as private
+	May not override static methods of the superclass.
+	A subclass should define its own constructors.
+	Cannot directly access the private variables of its superclass. It must use accessor or mutator methods.
+
+Declaring Subclass Objects
+	When a variable of a superlass is declared in a client program, that reference can refer not only to an object also
+	of the superclass, but also to objcts of any of its subclasses.
+
+	Exp)
+	
+	Student s = new Student();
+	Student g = new GradStudent();
+	Student u = new UnderGrad();
+
+	The following are not valid:
+
+	Gradstudent g = new Student(); //doesn't work
+	Undergrad u = new Student(); // doesn't work
+	
+	Note that student is not necessarily a GradStudent nor an UnderGrad.
+
+	Suppose you make these method calls:
+
+	s.setGrade("pass");
+	a.setGrade("pass");
+	u.setGrade("pass");
+
+	The apropriate method in Student is found since GradStudent and UnderGrad both inherit the setGrade method from Student.
+
+Polymorphism
+	A method hat has been overridden in at least one suclass is said to be polymorphic. An example is the computeGrade method which is redefined in
+	both GradStudent and UnderGrad.
+
+	Polymorphism is the mechanism of selecing the appropriate method for a particular object.
+
+	Even though s, g, and u are all declared as type student, s.computeGrade(), g.computeGrade(), and u.computeGrade() will all perform 
+	the correct operations for their particular instances. In Java the selection of the correct method occurs during the run of the program.
+
+Dyanmic Binding (Late Binding)
+	Making a runtime decision about which method to call.
+	
+	Contrast this with selecting the correct method when methods are overloaded. The compiler selects the correct overloaded method at compile time
+	by comparing the method's signatures. This is known as static binding (early binding).
+
+Type Compatibility
+	Consider the statements
+		Student s = new GradStudent();
+		GradStudent g = new GradStudent();
+	Both s and g represent GradStudent objects. Howevr, s is of type Student, and the Student class does not have a getID method.
+	At compile time, only nonprivate methods of the Student class can appear to the right of the dot operator.
+
+	Don't get this confused with polymorhpism. getID is not a polymoprhic method. It occurs in jus the GradStudent class. 
+	
+	The error int x = s.getID(); can be fixed with a cast.
+
+	int x = ((GradStudent)s).getID();
+	
+	Note, that the outer parenthese are necessary because the dot operator has higher precedence when casting.
+
+	Note: Casting a superclass to a subclass is called a downcast.
+
+Type Rules for polymorphic methods
+	
+	a.method(b);
+
+	method selected by type of a at run time.
+	paramter b must be of correct type at compile time
+
+	For a declaration like:
+		Superclass a = new Subclass();
+	the type of a at compile time is Superclass, at run time it is Subclass.
+
+	At compile time method must be found in the class of a (Superclass). If method canot be found in the class 
+	of a (Superclass), you must do a cast on its actual type (Subclass).
+	
+	For a polymoprhic method, at runtime the actual object type of a is determined = Subclass in the example - 
+	and method is selected from Subclass. This could be inherited method if there is no overriding method.
+
+	The type of parameter b is checked at compile time.
+
+The ClassCastException
+	The ClassCastException is a run time exception thrown to signal an attempt to cast an object to a class
+	which it is not an instance of.
+
+	Student u = new UnderGrad();
+	System.out.println((String) u); //ClassCastException
+
+Abstract Classes
+	An abstract class is a superclass that represents an abstract concept and therefore should NOT be initialized. For example,
+	all shapes share certain properties like a perimeter and an area.
+
+The abstract keyword
+	An abstract class is declared with the keyword abstract in the header
+	
+	Ex)
+
+	public abstract class AbstractClass{
+		...
+	}
+
+If a subclass of an abstract class does not implement the methods, it itself must be an abstract class.
+
+An abstract class can have abstract methods. It can have no implementation code, just a header. The method appears in the abstract class as 
+a place holder. Every subclass will need to override these methods.
+
+An abstract class can have both instance variables and concrete (nonabstract) methods.
+
+Abstract methods are declared with the keyword abstract. There is no method boyd. The header is terminated with a semicolon.
+
+An abstract class may or may not have constructors.
+
+No instances can be created for an abstract class.
+
+Polymorphism works with abstract classes as it does with concrete classes.
+
+Interfaces
+	An interface is a collection of related methods whose headers are provided without implementations.
+
+	All of the methods are both public and abstract - no need to explicitly include these keywords.
+		Ex) double area();
+
+	The classes that implement a given interface may represent objects that are vastly different (unlike abstract classes).
+	They all, however, have in common a capability or feature expressed in teh methods of the interface.
+
+	A nonabstract class that implmeents an interface must implement every method fo that interface or it must be declared abstract.
+
+
+A class that extends a superclass can lso directly implement an interface.
+
+Notes: 1. The extends keyword must precede the implements keyword.
+       2. A class can have just one superclass, but it can implement any number of interfaces.
+
+The Comparable Interfaces
+	The standard java.lang package. Contains the Comparable interface which provides a useful method for comparing objects.
+
+	public interface Comparable{
+		int compareTo(Object obj);
+	}
+
+	Any class that implements Comparable must provide a compareTo method. This method compares the implicit object (this) with the 
+	explicit parameter object (obj) and returns a negative integer, zero, or a positive integer depending on whether the implicit object
+	is less than, equal to, or greater than the parameter. If the two objects being compared are not type compatibl, a ClassCastException is
+	thrown.
+
+	Classes written for objects that need to be compared should implement Comparable.
+
+	It is tempting to use a simpler test for equality of areas
+		if(diff == 0)
+			return 0;
+
+	But recall that real numbers can have round-off errors in their storage.
+
+Object class
+	The Object class is a universal superclass. This means that the compareTo method can take as a parameter any object reference that implements
+	Comparable.
+
+	The first step of a compareTo method must cast the object argument to the class type. Remember an object is not necessarily a shape.
+
+Abstract Class versus Interface
+	Use an abstract class for an object that is application specific, but incomplete without its subclasses.
+	
+	Consider using an interface when its methods are suitable for your program, but could be equally applicable in a variety of programs.
+
+	An interface cannot provide implementations for any of its methods whereas an abstract class can.
+
+	An interface cannot contain instance variables, but an abstract class can.
+
+	An abstract class and interface can both declare constants.
+
+	An interface cannot be instantiated.
+
+Some Standard Classes
+
+	The Object Class
+		Think of Object as the superclass of the universe. Every class automatically extends from Object. In a class hierarchy tree, Object is at the top.
+		
+		There are many methods in Object, all of them inherited by every other class. Since Object is not an abstract class, all of its methods have 
+		implementations. These methods will be overridden in any class where the default implementation is not suitable. For the AP test, you just need 
+		to know the toString() and equals() methods.
+
+	The toString method
+		When you attempt to print an object, the inherited efaultoString() method is invoked, and what you'll see is the class name followed by an @ followed
+		by the address in memory of the object.
+
+		To have more meaningful output, you need to override this method. Even if your final program doesn't need to output any objects, you should define 
+		a toString() method to help in debugging.
+
+	The equals method
+		All classes inherit this method from the Object class
+			
+			public boolean equals(Object obj)
+
+		It returns true if this Object and obj are the same Object, false otherwise. Being the same object means referencing the same memory slot.
+
+		More often than not, you want two objects to be considered equil if their contensts are the same, not their memory location. In this case, you must override the equals method.
+
+		Note: 
+			Do not use == to test objects for equality. Override the equals method.
+		
+			The operators <, > are not overloaded in Java. To compare objects, use the equals method or the compareTo method.

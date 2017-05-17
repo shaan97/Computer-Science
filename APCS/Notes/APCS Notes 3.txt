@@ -1,0 +1,347 @@
+Chapter 3
+
+Not in Book
+Basic Concepts of Computers
+
+Most computer systems have three basic structures, or subsystems
+	(1) RAM - High speed memory (Random Access Memory)
+	(2) CPU - The brains of the computer (Central Processing Unit)
+	(3) I/O subsystem - communicates with Input and Output devices
+
+Number Systems and Codes
+	The most common number system is decimal. However, due to the binary nature of
+electronic devices, the use of decimal system is limited. Most data representation and
+arithmetic operations are carried out in the binary system or some of its shorthand
+notation such as octal or hexadecimal systems.
+
+Computer Memory
+	Divided into logical units called bytes
+
+	0||0|1|1|0|1|0|1}bit
+	|_______________|
+		|
+		byte = 8 bits
+	
+Address Space
+	Address Space is the set of unique addresses that a program can reference.
+	The size of this space can be calculated by 2^n where n is the number of bits
+	used to represent that address.
+
+	Bytes are grouped into larger units.
+	
+	1 nibble = 4 bits
+	1 byte = 8 bits
+	1 word = 2 bytes
+	1 longword = 4 bytes
+
+	Computer Memory
+		Decimal		Binary
+	megabyte = 10^6		2^20
+	gigabyte = 10^9		2^30
+	terabyte = 10^12	2^40
+	petabyte = 10^15	2^50
+
+Convert 1 1 0 0 1 1 0 1 to decimal
+	(1*2^7) + (1*2^6) + (0*2^5) + ... + (1*2^0)
+
+Convert 300 into binary
+
+300	150	0
+150	75	0
+75	37	1
+37	18	1
+18	9	0
+9	4	1
+4	2	0
+2	1	0
+1	0	1
+
+100101100
+
+Hexadecimal Number System
+	Base 16
+	
+		0|1|2|3|4|5|6|7|8|9|A |B |C |D |E |F |G |
+		0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|
+
+	Convert 1A5F to decimal
+		(1x16^3) + (Ax16^2) + (5x16^1) + (Fx16^0)
+		=4096+2560+80+15
+		=6751
+
+	Convert AF3B1 to binary
+		A=> 1010
+		F=> 1111
+		3=> 0011
+		B=> 1011
+		1=> 0011
+		AF3B1=? 10101111001110110001
+	
+	Convert from Binary to Hexadecimal
+		0010|0111|1010|1010|0111
+		  2 |  7 | A  | A  | 7
+	
+	Convert from decimal to Hexadecimal
+		300	18	12
+		18	1	2
+		1	0	1
+		0
+		12C
+
+Octal Number System (Base 8)
+	Octal   0|1|2|3|4|5|6|7|
+	Decimal 0|1|2|3|4|5|6|7|
+	
+	Convert 30 base 8 to decimal
+		= (3x8^1) + (0x8^0)
+		=24 base 10
+
+	4307 base 8 = (4x8^3) + (3x8^2) + (0x8^1) + (7x8^0)
+		=2247
+
+	Convert 41 base 10 to Octal
+		41	5	1
+		5	0	5
+		0
+	
+		51 base 8
+
+Parameters
+	Computer scientists use the word parameter to mean that both what appears 
+	in the method header (which we call the formal parameter) and what appears
+	in the method call (the actual parameter).
+
+Formal Parameter
+	A variable that appears inside parentheses in the header of a method that
+	is used to generalize the methods behavior.
+
+Actual Parameter
+	A specific value or expression that appears inside parentheses in a method
+	call.
+
+
+Exp)
+	writeSpaces(10);
+		     //^----------actual parameter
+	public static void writeSpaces(int number){
+		.
+		.
+		.
+	}
+
+Limitations of Parameters
+	We've seen that a parameter can be used to provide input to a method.
+	However, you CANNOT use a parameter to get a value out of a method.
+
+Multiple Parameters
+
+	public static void <name>(<type> <name>, ..., <type> <name>){
+		<statement>
+		.
+		.
+		.
+	}
+
+	To call the method:
+
+		<method name>(<expression>,...,<expression>);
+
+	Exp)
+	writeChars('*',20);
+public static void writeChars(char ch, int number){
+	for(int i=1;i<=number; i++){
+		System.out.print(ch);
+	}
+}
+
+Parameters vs. Constants
+	In chapter 2 we learned how class constants are useful to increase the 
+	flexability of your programs.
+	
+	For example, I could of used the following
+	public static final int NUMBER_OF_STARS = 20;
+
+	However, this is bad because the constant can only change from one execution to another.
+
+	Parameters are more flexable than constants.
+
+Overloading Methods
+	Method signature
+		The name of the method, along with its number and type of parameters.
+
+	Method Overloading
+		The ability to define two or more different methods with the same name but
+		different method signatures.
+
+	Exp)
+		drawbox(8,10);
+		drawbox();
+
+	You could have a drawBox method that allows you to specify the height and the width,
+	but you might also want to have a version that draws a box of a default size.
+
+	Java will know which method to call by the number of parameters you use.
+
+Methods That Return Values
+	Methods may be part of a larger program. Therefore, you may want to return a value to
+	the caller of that method, rather than just printing it.
+
+Return
+	To send a value out as a result of a method that can be used in an expression in your
+	program. Void methods do not return any value.
+
+	If you had such a method, you ask for the square of 4 by writing code like this:
+
+	Ex.)
+	
+		int answer = squared(4);
+		System.out.println(squared(4));
+	A method can return any type, so your method might look like this:
+		
+		public static int squared(int i){
+			return(i*i);
+		}
+
+The Math Class
+	The Math class is one of Java's predefined code known as the Java class libraries.
+	It includes some predefined constants and a large number of mathematical methods.
+
+	Exp)
+		double root= Math.sqrt(i);
+	Note: The methods in the math class are static. Therefore, you must call them using
+	the class name (i.e. Math.sqrt(25);)
+
+You can write your own methods that return values by using the keyword return
+	Exp) We can use Gauss' formula [(n+1)n]/2 to return the sum of the first n integers.
+	
+	public static int sum(int n){
+		int a = (n+1)n/n;
+		return a;
+	}
+	
+	To call the sum method, we could write
+	
+	int answer = sum(100);
+
+Syntax for a method that returns a value
+	public static <type> <name>(<type><name>, ...<type><name>){
+		<statement>;
+		<statement>;
+		.
+		.
+		.
+		return <expression>;
+	}
+
+Objects
+	We've spent a lot of time on primitive types. Now--objects.
+
+Object
+	A programming entity that contains state (data) and behavior (methods).
+
+Class
+	A category or type of object.
+
+String Objects
+	String objects are one  of the most commonly used objects.
+	
+	Since Strings are objects, they have methods. One method we use a lot is the length method.
+	If the length method were a static method, you would call it by saying: 
+		length(s1);
+	Since the length method is not static (it's an object method), we must call it like this:
+		s1.length();
+
+	Exp)
+	String s1 = "Hello";
+	String s2 = "Hello World";
+	System.out.print("length of s1 " + s1.length()); //5
+	System.out.print("length of s2 " + s2.length()); //11
+
+	Each character of a string object is assigned an index value, starting with 0.
+
+Index
+	An integer used to specify a location in a sequence of values. Java uses zero-based indexing.
+	(0,1,2,3,4,...n) and so on.
+
+	Exp)
+	 0 1 2 3 4 5 6 7 8 9 10 11 12
+	|H|E|L|L|O| |W|O|R|L|D| | |
+
+	String s1 = "Hello "
+	for(int i=0; i< s1.length(); i++){
+		System.out.println(i+ "i" + s1.charAt(i));
+	}
+
+The Substring Method
+	It takes two integer arguments representing a starting and ending index: the index of the first
+	character and the index JUST PAST the last index that you want.
+
+	String s1 = "Hello World";
+	
+	s1.substring(0,7); //Hello W
+
+	There is also a substring method with one argument (Remember, method overloading: you can have
+	two methods with the same name as long as they have different parameters).
+
+	String s1 = "Hello World";
+	s1.substring(6);//World
+	This method starts at the specified index and prints the rest of the String. If you try to ask 
+	for a position beyond the end of the String, your program will generate an execution error.
+
+The nextLine() method
+	The nextLine() method reads input line by line. The other methods are token based.
+
+Token
+	A single element of input. (e.g. one word, one number).
+	By default, the Scanner class uses white space to separate tokens.
+
+	White Space
+		Spaces, tab characters, and new line characters.
+
+	Exp) The line of input
+
+	> hello there. "how are" you?
+	How many tokens are there?
+
+	Java would split this line into 5 tokens:
+		hello
+		there.
+		"how
+		are"
+		you?
+ 
+	If the user types the wrong type such as xyz for the nextInt(); the Scanner object generates an exception.
+
+Sample Interactive Program Example
+	If you ever find yourself buying a house, you'll want to know what your monthly mortgage payment is going
+	to be.
+	
+	Monthly payment = loan amount * [c(1+c)^n]/[(1+c)^n - 1]
+
+	where n is the number of years
+	and c is the interest rate.
+
+	Notice the import statement at the start of this program. This line imports to the utility package.
+
+	Package
+		A collection of related Java classes
+	
+	Import
+		A request to access a specific Java package.
+
+	Exp)
+		import Java.util.*;
+		or you can just import specific classes within a package
+		import java.util.Scanner;
+
+	We haven't needed to import any packages yet, because Java automaticallyimports the java.lang package,
+	which includes basic classes that most programs are likely to use.
+		i.e. System, String, Math
+
+Rounding Numbers
+	To round to the nearest hundreth:
+		double x = 3.18765;
+		System.out.print(Math.round(x*100.0))/100.0)
+	To round to the nearest thousandth, add one more zero:
+		double x = 3.18765;
+		System.out.print(Math.round(x*1000.0)/1000.0)

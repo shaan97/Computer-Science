@@ -1,0 +1,32 @@
+Chapter 10
+
+ArrayLists
+	An ArrayList provides an alternative way of storing a list of objects. It has several advantages over arrays.
+
+	1. ArrayList shrinks and grows. An array is fixed in length.
+	2. The last slot in an ArrayList is size() - 1.
+	3. With ArrayLists, you can do insertion or deleting in a single statement. Any shifting of elements is handled automatically.
+
+	Note about Collection.sort() : The java.util package has a class called Collections that contains several useful methods related 
+	to all collections. The Collections class contains static methods that operate on lists. Here are some useful methods of the Collections
+	class. (See #3)
+
+	An ArrayList is an example of a Collection. Here are some more examples of collections. (See #4)
+
+Boxing and Unboxing
+	There are no primitive types in Collection classes. An ArrayList must contain objects.
+
+	Boxing is the autoatic wrapping of primitive types into objects. Therefore, if you must use primitive types in the Collection classes, you
+	must box them first.
+
+		Exp) 	int x = 38;
+			Integer y = new Integer(38);
+	To unbox use
+		int z = y.intValue();
+
+Auto-Boxing and Auto-Unboxing
+	Is the automatic conversion of a wrapper class to its corresponding object or primitive type. This means that ou don't explicitly box and unbox
+	for Collections (ie ArrayList).
+
+It is much more efficient to assign and access primitive types in an array than an ArrayList. You should considr using an array for a program that 
+does not need to use objects. (See #5)

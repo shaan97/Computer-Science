@@ -1,0 +1,154 @@
+Algorithm
+	A step by step description of to acomplish a task
+
+Compiler
+	A program that translates a computer program in a high level language (like Java) to a lower level language (usually machine language)
+
+How does Java work
+	1.) Write a program
+	2.)Compile the program into Java bytecode (.class)
+	3.)Run the program on a Java virtual machine
+
+Why use Java
+	Simple to learn, O.O.P., network savvy, robust, secure, portable.
+	
+Java class libraries
+	The collection of preexisting Java code that provides solutions to common programming problems.
+
+Basic Java program must have:
+	1.) public class <name> {
+		<method 1>
+		<method 2>
+		<method 3>
+			.
+			.
+			.
+	}
+
+Method
+	A program unit that represents a particular action or computation.
+
+	public static void <name> {
+		<statement 1>;
+		<statement 2>;
+
+
+****CLASS NAMES ARE UPPER CASE, AND METHOD NAMES ARE LOWERCASE. STATEMENTS END IN SEMICOLONS (;).
+	static = method of the class
+	void = doesn't return anything****
+
+Statement
+	An executable snippet of code that represents a complete command.
+	
+	System.out.println("Hello World");
+
+String Literal
+	Surrounding text in Quotation marks
+
+	"Hello World"
+	
+	You must use double quotes
+	
+	'Bad Stuff here'
+
+	Must not span more than one line
+
+println();
+	Each println statement produces a different line of output.
+
+Escape sequences
+	String literals can lead to difficult situations. What if you want to print a double quote (")?
+	\t = tab space
+	\n = new line
+	\" = quotation mark
+	\\ = backslash
+
+print() vs println()
+	print() = produces output on current line without going to a new line of output
+		Ex. System.out.print("you are");
+		    System.out.print("swag");
+	println() = produces output and then moves onto next line.
+
+Identifiers and Key Words
+	Identifier
+		A name given to an entity in a program such as a class, method, or variable.
+	Classes - uppercase
+	Methods - lowercase
+	use cammel case - hi There; Trig Functions
+
+	Identifiers must start with a letter which can be followed by any number of letters or digits
+	Java also includes the underscore (_) and $ as letters.
+
+	The following are legal identifiers:
+		_count, $2donuts, MAX_COUNT
+
+	The following are not legal identifiers:
+		two+two, hi there, 2by4
+
+	List of Java Reserved words see table 1.4 in your book in Chapter 1
+
+Comments and Readability
+	1) Put class and method headers on lines by themselves
+	2) Put no more than one statement on each line
+	3) Indent your program properly. When an opening brace ({) appears, increase the indentation of the lines that follow it.
+	When a closing brace appears, reduce the indentation. Also, make sure to indent statements 
+	inside curly braces by a consistent number of spaces. A common choice in the industry is 4 spaces, and I want you to use that in this class.
+	4) Use blank lines to separate parts of the program.
+
+
+9/10
+
+Comments
+	Text that programmers include in a program to explain their code. The compiler ignores comments.
+	Two wasy to write comments in java.
+
+	1) //This is
+	   // a comment
+	2)
+	/* This is a comment */
+
+****EVERY PROGRAM IN MY CLASS (FOR CREDIT) MUST START
+/*
+Shaan Mathur
+Per. 4
+Assignment # or the project name
+*/
+
+Every method needs a comment
+(A short description of what the method does)
+
+ie // returns the average of a group of numbers
+
+Program Errors
+	Syntax Errors - bad grammar that is caught by the compiler
+	Logic Errors - when you write a program that doesn't perform the task that it was intended to perform
+	Runtime Error - Logic errors that are so severe that Java stops your program (program crash) from executing
+
+	Logic errors are also called "bugs"
+	We use the term like "bug-ridden code" and "buggy" to describe poorly written programs.
+
+	The procss of fixing those bugs is called "debugging".
+
+
+****
+9/12
+Procedural decomposition (Redundancy)
+	Solving problems by dividing the problem into manageable pieces.
+	i.e. Dividing a large task into subtasks.
+
+	Java is designed for objects, and programming in Java usually involves
+	decomposing a problem into various objects, each with methods that 
+	perform particular tasks.
+
+	Methods help reduce redundancy.
+
+Static Method
+	A class method, not an object method, that contains Java statements.
+
+Method Header
+	public = indicates that this method is available to be used by all parts of your program
+	static = means it's a class method, not an object method
+	<name> = the name of the method
+	void = means the method does not return a value
+	Empty parantheses "()" = means you are not passing the method any paramaters
+	

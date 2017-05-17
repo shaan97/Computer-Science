@@ -1,0 +1,366 @@
+Program Logic and Indefinite Loops
+	Indefinite loops executes an unknown number of times. The while loop
+	is the first indefinite loop we will study.
+
+	while(<test>){
+		<statement>
+	}
+
+while loop flow chart
+
+	No<----	Is this true?---->Yes
+	|		^	  |
+	|		|	  |
+	|		|	  v
+	|		----------Execute the controlled statements
+	v
+	Execute the statemnts
+	after the while loop
+
+Exp)
+	int number = 1;
+	while(number<=10){
+		System.out.println("number = "+number);
+		number++;
+	}
+
+do/while loop
+	The while loop is the standard indefinite lopo, but Java provides several
+	alternatives. One of them is the do/while loop
+
+	do{
+		<statment>;;
+	}while(<test>);
+
+do/while flow chart
+	Execute the controlled statements
+		|		  ^
+		v		  |
+		Is test true?--->Yes
+		|
+		v
+	Execute statements after do/while loop
+
+Exp)
+	int number = 1;
+	do{
+		number*=2;
+		println("number = "+ number);
+	}while(number<=20);
+
+Random Numbers
+	Random Reals
+		The statement:
+			double c = Math.random();
+		produces a random real number in the range of 0.0<=r<1.0
+
+	Exp 1)
+	Produces a number in the range 0.0<=x<6.0
+		double x = Math.random()*6;
+
+	Exp 2)
+	Produces a number in the range 2.0<=x<6.0
+		double x = Math.random() + 2;
+
+	Exp 3)
+	Produces a number in the range of 4.0<=x<6.0
+		double x = (Math.random()+2)*2);
+
+
+In general, GET NOTES HERE
+
+
+
+
+Random Integers
+	Using a cast to int, a scaling factor, and a shifting value, Math.random() can be used to
+	produce random integers in any range
+
+Exp 1)
+	Produces an integer from 0 to 99
+		int x = (int)(Math.random()*100);
+		
+		[0.0<=x<1.0]*100
+		0.0<=x<100
+		
+		(int)[0.0<=x<=9.999]
+		0<=x<=99
+Exp 2)
+	Produces an integer from 1 to 100
+	
+	int x = (int)(Math.random()*100)+1;
+
+Exp 3)
+	Produce an integer from  5 to 24
+
+	int x = (int)(Math.random()*20)+5;
+
+In general, if k is a scaling factor, and p is a shifting value, the statement:
+	int x = (int)(Math.random()*k)+p;
+produces a random integer in the range of 
+	p, p+1, p+2 ,..., p+(k-1)
+
+Note: There are 20 possible integers from 5 to 24, inclusive
+
+int x = (int)[Math.random()*(max-min+1)]+min
+
+MISSED NOTES: THE SWITCH STATMENT
+
+Other Control Structures
+	The Switch statement
+		The switch statement is a control structure that is similar to the if/else statement
+
+	It uses the following syntax:
+	
+	switch(<integer expression>){
+		case <value>:
+			<statements>;
+			break;
+		case <value>:
+			<statements>;
+			break;
+		.
+		.
+		.
+		default: //optional
+			<statements>;
+			break;
+	}
+
+
+Exp)
+
+	switch(place){
+		case 1:
+			System.out.print("first place");
+			break;
+		case 2:
+			System.out.print("second place");
+			break;
+		case 3:
+			System.out.print("third place");
+	
+		case 4:
+		case 5:
+			System.out.print("You did not place:);
+			break;
+		default:
+			System.out.print("you lose");
+			break;
+
+
+Exiting a Loop: break and continue
+	Java has a statement called break that will immediately exit a while, do/while, for loop, or switch
+	statment.
+
+	The continue statement immediately ends the current iteration of a loop.
+
+	Exp)
+		int sum = 0;
+		while(true){
+			System.out.print("Enter a number (-1 to quit):");
+			int number = console.nextInt();
+			if(number == -1){
+				break;
+			}
+			sum+=number;
+		}
+		System.out.print("sum = " + sum);
+
+		for(int i = 0; i<100; i++){
+			System.out.print("Tyep a nonnegative number");
+			int number = console.nextInt();
+			if (number < 0){
+				continue; //skips this number
+			}
+			sum+=number;
+		}
+		System.out.prin("sum = "+sum);
+
+Enumerations: enum (Enumerated Types)
+	Sometimes we want to create a type that has a small number of predefined constants. values.
+
+	Exp)
+		public enum Suit{
+			CLUBS, DIAMONDS, HEARTS, SPADES
+		}
+
+		Suit myCardSuit = Suit.DIAMONDS;
+		if(myCardSuit == Suit.CLUBS){
+			//then this card is a club
+		}
+
+
+Fencepost Algorithms
+	A common programming problem involves a loop known as the fencepost loop.
+	
+	Consider the problem:
+		You want to build a fence a 100 yards long and you want a fence post every 10 yards.
+		How many posts do you need? You need 11
+
+	For another example, consider writing the integers between 1 and 10 separated by commas.
+
+	The key to solving this problem is to plant one of the post first
+	(or in our case, print one of the numbers before the loop).
+
+Sentinel Loop
+	Sentinel loops are used to read a series of elements (ints, Strings, etc) from the user. The user
+	signals the end of the input by inserting some special input. 
+
+	Sentinel
+		A special value that signals the end of the input. A fencepost problem arises a lot with
+		Sentinel loops
+
+
+The boolean type
+	Logic is as fundamental to computing as Physics is to engineering.
+
+Exp)
+	boolean test1 = true;
+	boolean test2 = false;
+
+	test 1 = test 2; //test1 is now false
+	
+	test 1 = (2+2 == 4); //true
+	test 2 = (3*100<250); //false
+	test 1 = (1 < 2) || (2 == 3) //true
+	test 2 = !(2==2) //false
+
+Exp)
+
+	if(x==1 || x==z ||x==3){
+		doSomething();
+	} //This does compile
+
+Exp)
+	if(1 <= x && x <= 10){
+		doSomething();
+	} //This does compile
+
+ORDER OF OPERATIONS: && FIRST, THEN || (UNLESS PARANTEHESES)
+
+New Java Operator Precedence
+	Uniary Operators	(cast), !, ++, --, +, -		right to left
+	Multiplicative		*, /, %
+	Additive		+, -
+	relational		<, >, <=, >=
+	Equality 		==, !=
+	Logical And		&&
+	Logical Or		||
+	Assignment		=, +=, -=,*=,/=,%=		right to left
+
+DeMorgan's Laws
+	Programmers often find themselves needing to form the negation of a complex Boolean expression
+	
+	For example, it is often easiest to reason about a loop in terms of an exit condition that would make us
+	want to stop the loop.
+
+	For example, we want a user to enter a 2 digit number
+
+		number>=10 && number<=99
+		
+		while(!(number>=10 && number <=99)){
+			System.out.print("Please enter correct number");
+		}
+
+	A general approach to simplify such expressions was formulaized by the British logician DeMorgan.
+	We can apply one of two rules to simplify such expressions. These rules are known as DeMorgan's Laws.
+
+
+Original Expression		Negated Expression		Simplified Negation
+p || q				!(p || q)				!p && !q
+P && q				!(p && q)				!p || !q
+
+	while(!(response.equals("Yes") || response.equals("no"))){
+		System.out.print("I'll ask again, do you like candy?");
+		<prompt>;
+	}
+
+
+Using deMorgan's Law
+	while(!response.equals("Yes") && !response.equals("no")){
+		System.out.print("	");
+		<prompt>;
+	}
+
+Write a boolean expression that is the negation of each of the following
+a)	b	=>	!b
+b) (x>y) &&(y>z)	=>	!((x>y) && (y>z))	=> !(x>y) || !(y>z)	=> x<=y || y<=z
+c)	(x==y) || (x<=z)	=> !((x==y) || (x<=z))	=> !(x==y) && !(x<=z)	=> (x!=y) && (x>z)
+d) (x%z != 0 ) && b	=>	!((x%z != 0 ) && b)	=> !(x%z != 0) || !b	=> x%z == 0 || !b
+e) (x/z == 15) || b || (z*3==96) => x/z != 15 && !b && (z*3!=96)
+f) (z<x) && (z>y || x>=y)	=>	z>=x || (z<=y && x<y)
+
+User Errors
+	It's preferable to write programs that can deal with user errors. Such programs are robust.
+
+	Robust
+		The ability of a program to execute even when presented with illegal data.
+	
+Scanner Lookahead Methods
+	The Scanner class has methods that allow you to perform a test before you read a token.
+	
+	hasNext()		|
+	hasNextDouble()		|
+	hasNextInt()		}return true if next token is valid, else they return false.
+	hasNextLine()		|
+
+	Exp)
+	
+	public static int getInt(Scanner console, String prompt){
+		System.out.print(prompt);
+		while(!console.hasNextInt()){
+			console.next(); // to discard the input
+			System.out.println("Not an integer");
+			System.out.print(prompt);
+		}
+		return console.nextInt();
+	}
+
+To use this method, we could use the following code:
+
+	Scanner input = new Scanner(System.in);
+
+	int age = getInt(input,"How old are you?");
+
+TEST REVIEW
+	1. Know how to write a function (methods) [Know the syntax]
+		public static int getAge(<parameters>){
+	2. Know the scope of variables
+	3. Know your && and || tables
+	4. Evaluate expressions that contain && and ||
+		Know that && comes before ||
+	5. Make sure you know !=
+		3!= 3 && 4>=7
+	6. cast
+	7. DeMorgan's Laws
+	8. String functions (Substring (2 versions), indexOf, length)
+	9. if/else statements
+	10.while loops/ for loops
+	11. pre/post increment/decrement
+	12. boolean
+	13. Random Numbers (int) (Mr.Holcomb's way)
+	14. Package
+
+Assertions and Program Logic
+	Logicians concern themselves with declarative statements called assertions.
+
+	Assertion
+		A declarative sentence or statement that is either true or false
+
+	Exp)
+		2+2 equals 4
+		The sun is larger than the Earth.
+		x>45
+		.
+		.
+		.
+	To write programs correctly and efficiently, you must make assertions.
+
+Provable Assertion
+	An assertion that can be proven to be true at a particular point in the progam execution.
+
+The focus on assertions comes out of a field of Computer Science known as program verification.
+
+A field of Computer Science that involves reasoningabout the formal properties of programs to prove the correctness
+of a program

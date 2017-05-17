@@ -1,0 +1,291 @@
+Chapter 4
+
+Conditional Execution
+	The if statement
+		The if statement, like a for loop, is a control structure
+
+		if(<test>){
+			<statement>
+			.
+			.
+			.
+			<statement>
+		}
+
+Flow Chart for the if statement
+	Is test true?----------------------> Yes
+		|			     |
+		|		 	     |
+		|			     v
+		|
+		v			Execute statements
+	Execute statements 			|
+	after the if statement <----------------|
+
+Exp)
+
+	if(number>0){
+		answer=Math.sqrt(number);
+	}
+
+
+The if/else statement
+	if(<test>){
+		<statements>
+		.
+		.
+		.
+	} else if (<test 2>){
+		<statements>
+		.
+		.
+		.
+	} else if(<test 3>){
+		<statements>
+		.
+		.
+		.
+	} else {
+		<statements>
+		.
+		.
+		.
+	}
+
+	Note: You may write this without the last else statement.
+
+Exp)
+
+	if(number>0){
+		System.out.print("number is positive");
+	} else if(number==0){
+		System.out.print("number is zero");
+	} else {
+		System.out.print("number is negative");
+	}
+
+Multiple Conditions
+	When you are writing a program, you often find yourself wanting to test
+	more than one condition.
+
+	Exp) Suppose you want to remember whether a number is between one and ten.
+
+	if(number>=1){
+		if(number<=10){
+			doSomething();
+		}
+	}
+	
+	Java provides an efficient alternative. You can combine two tests by using
+	the logical && (AND). Also, there is the logical || (OR).
+
+	Exp)
+		if(number>=1 && number<=10){
+			doSomething();
+		}
+	Exp)
+		if(number == 1 || number == 2){
+			processNumber();
+		}
+
+Object Equality
+	You cannot use == or != to test for equality or nonequality with objects
+
+	For Strings (as well as all objects) you must use the equals() method.
+
+	Exp)
+		System.out.print("Enter Yes or No?");
+		String s = console.next();
+		if(s.equals("Yes")){
+			processYes();
+		}else if(s.equals("No")){
+			processNo();
+		}else {
+			System.out.print("You didn't enter Yes or No");
+		}
+
+Cumulative Algorithm
+	An operation in which an overall value is computed incremently, often using a loop.
+
+	Such examples would include, but not limited to:
+		(1) Finding a cumulative Sum or Average
+		(2) Finding the Max/Min values from a set of numbers
+
+Cumulative Sum
+	Is the sum of a series of numbers.
+	
+	Here is the pseudocode description:
+		Sum = 0
+		for(all the numbers to sum)
+			obtain "next" number
+			Sum +=next
+	
+	Pseudocode
+		English-like description of algorithms. 
+
+Max/Min Loops
+	Another common task is to keep track of the maximum or minium values in a sequence.
+	
+	Here is the pseudocode for finding the maximum value:
+		initialize max to either the lowest possible value or to the first value.
+		for(all numbers to examine)
+			obtain the "next number
+			if(next>max)
+				max=next
+
+	The pseudo code for theminimum is as follows.
+		initialize min to highest possible value or to the first value
+		for( all numbers to be examined)
+			obtain "next" number
+			if(next< min)
+				min=next
+
+Roundoff Errors
+	When working with doubles you'll discover a problem: roundoff errors.
+
+	Roundoff errors
+		A numerical error that occurs because floating-point numbers are 
+		stored as approximations rather than exact values.
+	
+	Roundoff errors are generally small and can occur in either direction (slightly high
+	or slightly low)
+
+	Roundoff errors can lead to surprising outcomes
+	
+	Exp) Find the average of the following numbers.
+	
+	(2.1 + (-3.8) + 5.4 + 7.4)
+
+	This produces the result: 2. 77500000000004
+	The actual result is 2.775
+
+	The problem is that numbers like 0.1 cannot be stored exactly in base 2 (binary)
+
+	As a third example, consider adding together the values of a penny, a nickel, a dime, and
+	a quarter.
+
+	double dollars1 = 0.01 +0.05 + 0.10 + 0.25
+	double dollars2 = 0.25 +0.10 + 0.05 + 0.01
+	
+	System.out.println(dollars1); //0.410000000003
+	System.out.println(dollars2); //0.41
+There are things to be aware of when working with doubles
+	1. When you store doubles, you store approximations, not exact values. If you need exact
+	   values, use ints.
+	2. When working with doubles, don't be surprised when you see numbers that are slightly
+	   off from the expected values.
+	3. Don't expect to be able to compare doubles for equality
+	
+	if(dollars1==dollars2({
+		.
+		.
+		.
+	}
+	This test would evalluate to false because values are very close, but not equal.
+	
+	Instead, we can use a test like this to see if two numbers re close to one another.
+
+		if(Math.abs(dollars1-dollars2)<0.001){
+			.
+			.
+			.
+		}
+
+	Here we use the absolute value method from the Math class to find the magnitude of 
+	the difference and then test whether it is less than some small amount (in this case 0.001)
+
+Text Processing
+	Programmers commonly face problem that require them to create, edit, examine, and format text.
+	
+	Text Processing
+		Editing and formatting Strings of text
+
+The char Type
+	Literal values of type char are expressed in single quotes
+	
+	Exp)
+		char	ch = 'A';
+	
+	What are the differences between char and String
+		See Table 4.4 in the book
+
+	Exp) This method prints each character of a String on separate line.
+
+	public static void printVertical(String message){
+		for(int i=0; i<message.lengh(); i++){
+			char ch = message.charAt(i);
+			System.out.print(ch);
+		}
+	}
+
+	Exp) The following method accepts a String and a character and returns the number of times
+	     the character occurs.
+
+A String and char can be cancotanated by using a +
+	Exp) "Hello" + 'W'
+		would make HelloW
+		Exp)
+		The following method accepts a String and returns the characters in reverse order
+	
+		public static String reverse(String phrase){
+			String result ="";
+			for(int i=0; i<phrase.length(); i++){
+				result = phrase.charAt(i) + result;
+			}
+			return result;
+		}
+There is another class called the Character class. The methods of this class take characters as inputs
+to the methods as paramaters.
+	Here are some of the methods of the Character class that you might use:
+		isDigit(ch) - Tests whether the character is one of the digits '0' to '9'
+		isLetter(ch) - Tests whether the character is in the range 'a' to 'z' or 'A' to 'Z'
+		isUpperCase(ch) - Tests whether upper case
+		isLowerCase(ch) - Tests whether lower case
+		getNumericalValue(ch) - Converts a character that looks like a number into that number
+		toLowerCase(ch) - Converts a character into lower case
+		toUpperCase(ch) - Converts a character into upper case
+
+Formatting Output with Java
+	A third way to print is using System.out.printf(); The f stands for formatting.
+
+	System.ot.printf(<format String>, parameter,...,parameter);
+
+	A format String is like a normal String except it can contain placeholders called format specifiers.
+
+Format Specifier
+	Begins with a % sign and ends with a letter specifying the kind of value, such as d for integers
+	and f for floating numbers (doubles)
+
+	Exp)
+		int x = 38, y = -152;
+		System.out.printf("location:(%d,%d)ln", x,y); //location:(38,-152)
+
+	Exp)
+		int score = 87;
+		double gpa = 3.18652;
+		String name = "Jessica";
+
+		System.out.printf("Student Name: %10sln", name);
+		System.out.printf("exam score: %10dln", score);
+		System.out.printf("GPA        :%10.2FLN, GPA);
+
+		This produces the output:
+		
+		Student Name:		Jessica
+		Exam score  :		87
+		GPA   	    :		3.19
+
+		The three values line up on teh right edge, because we print with width 10. 
+		The GPA rounds to 3.19 because of the 2 in that variables' format specifier.
+
+		Here are some more useful Format specifiers:
+			%d	Integer
+			%8d	Integer, right-aligned, 8 space-wide field
+			%-6d	Integer, left-aligned, 6 space-wide field
+			%f	Floating-point number
+			%12f	Floating point number, right aligned, 12 space-wide field
+			%.2f	Floating point number, rounded to nearest hundreth (only rounded when printed, not calculations)
+			%16.3f	Floating point number, rounded to nearest thousandth, 16-space-wide field
+			%s	String
+			%8s	String, right-aligned, 8 space-wide field
+			%-9s	String, left-aligned, 9 space-wide-field

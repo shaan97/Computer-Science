@@ -1,0 +1,70 @@
+Chapter 6 Files
+
+More on File Programming
+	Suppose we want our program to work no matter how many tokens are in the file.
+	Use the Scanner tests for valid input methods:
+		hasNext();
+		hasNextInt();
+		hasNextDouble();
+	
+	The first method returns true if there's a next token.
+	The next two methods return true if there is a next token and it can be read as an int or a double.
+
+Database
+	When are you using a database?
+	A	- Selecting an email from your address book
+		- Search the internet
+		- When you use an ATM card
+		- Buying something online
+
+	A database is a collection of data stored in some organized fashion.
+
+	People often use the term database to refer to the database software they are running. Database software is actually called the
+	Database Management System (DBMS).
+
+	The database is the container of the data created and manipulated via the Database Management System (DBMS).
+
+	A specific database is made up of one or more tables.
+
+	Table
+		A structured list of data of a specific type.
+
+
+	The key to remember is that the data stored in the table is one type of data or one list.
+	You would never store a list of customers and a list of orders in the same table.
+
+	Every table has a unique name. However, you can reuse table names in different databases.
+
+	Schema
+		Information about database and table layout and properties.
+
+	Columns
+		A single field in a table. All tables are made up of one or more columns.
+
+	Row
+		A record in a table.
+
+Primary Key
+	Every row in a table should have some column or set of columns that uniquely identifies it. A primary key value(s) should uniquely
+	identify every row in the table.
+	
+	Exp) An employee table might use an employee ID or a Social Security number column as a primary key.
+
+	Without a primary key, updating or deleting specific rows in a table would be difficult.
+
+Primary Key Rules
+	1. No two rows can have the same primary key value.
+	2. Every row must have a primary key value (no null's are allowed)
+
+Primary key Best Practices
+	- Don't update primary key values
+	- Don't reuse (i.e. repeat) primary key values
+	- Don't use values that might change
+
+What is SQL
+	SQL is an abbreviation for Structured Query language. SQL is a language designed specifically for communicating with datbases.
+
+What are some advantages of SQL
+	1. It is not a proprietary language. Almost every Database Management System supports SQL.
+	2. Easy to understand.
+	3. Despite its apparent simplicity, SQL is a very powerful language.
