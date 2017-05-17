@@ -1,0 +1,157 @@
+OPEN MP LAB REPORT - SHAAN MATHUR, UID: 904606576
+
+======================================================================================
+INTRODUCTION
+======================================================================================
+I began this lab examining some OpenMP slides to figure out how to
+properly use it. I saw a particular directive that seemed particularly
+useful for this project:
+
+#pragma omp parallel for
+
+This directive would automagically set up the threads without any extra
+work on my part. Seeing how this lab has 6 functions that all have at least
+one for loop, I decided to apply this.
+
+Before doing this, I decided to compile the original file with GPROF enabled
+using:
+
+make seq GPROF=1
+gprof seq | less
+
+Here I noticed that func1(...) occupied, at least according to gprof, around
+60% of the execution time. Glancing at this function, it made sense. There was
+a nested for loop in this function, while the others did not feature this.
+Most functions had an O(n) run time, while this one had O(n*k+n*m) runtime (using
+k and m because there were two inner loops and the number of executions of all three
+loops was different).
+
+I was very hesitant to begin actually applying OpenMP, because I did not understand
+much of what was going on in the code. I wanted to make sure there would be no race
+conditions in which the result of the function depended on the order of the multiple
+threads' execution. After seeing that there was no potential issues for the first
+of the inner for loops, I decided to use the directive mentioned above.
+
+======================================================================================
+METHOD 1
+======================================================================================
+
+Unfortunately, there was not much of an improvement. The original time for seq FUNC
+TIME execution was around .50 seconds, and this had dropped the time to around .48.
+I decided to use the function
+
+omp_set_num_threads(int num);
+
+to change the amount of threads running. This did help a little bit more, changing the
+execution time to .44-.46. However, this was not the speedup necessary to get the 3.5x
+speedup necessary for this project (which means getting the time down to .14). If func1
+was the best opportunity to achieve speedup and I was only getting a speedup of 1.25x,
+my methodology had to change. I tried applying the same parallel for directive to other
+functions to see if I could learn more from using the simpler functions, but still the 
+time of execution did not break .3.
+
+======================================================================================
+METHOD 2
+======================================================================================
+
+After researching more about OpenMP API, I learned more about how to properly to break
+down a loop into subproblems for threads. I am somewhat familiar with the notion of
+multithreading from Wikipedia, where we can abstractly think of it as multiple people
+collectively working on the same problem. However a major issue is that I want
+different threads to work on different iterations of the loops.
+
+I then saw an example of multithreading using OpenMP that uses the id of the thread to
+help determine which iterations of the for loop to work on. Essentially the code of
+a parallelizable loop would look something like:
+
+#define NUM_THREADS 8
+omp_set_num_threads(NUM_THREADS)
+
+#pragma omp parallel
+{
+	int id = omp_get_thread_num();		// Get's ID of thread in the range
+						// [0, NUM_THREADS)
+	int i;
+	for(i = id; id < n; i += NUM_THREADS){
+		// PARALLELIZABLE CODE
+	}
+}
+
+In this way, a for loop's execution would be broken such that every thread begins at
+the index of it's id, and would move in steps corresponding to the number of threads.
+This seemed like a good solution, but I felt there could be improvement. If every thread
+has it's own cache, then there could be problems. A lot of the functions in this project
+have arrays, and spatial locality says that if you index into an array, a large portion
+of memory near that index will also be cached. If you access arr[0], you will be able to
+quickly access arr[1]. This method wastes cache opportunity by taking steps of 
+NUM_THREADS, which gets worse as the number of threads increases. Abstractly we want a
+way to divide the array into CONTIGUOUS CHUNKS to give to each thread to work on.
+
+Thus comes...
+
+======================================================================================
+METHOD 3 (METHOD USED)
+======================================================================================
+
+If we have NUM_THREADS number of threads, and we want to divide a N element array such
+that every thread has roughly the same sized, contiguous chunk of the array to work 
+with, then we need some way of assigning chunks. This can use Method 2's way of using
+a thread's ID to assign the appropriate chunk. The chunk size will be roughly
+N / NUM_THREADS, so we will give each thread the starting index of
+
+int id = omp_get_thread_num();
+int i = id * N / NUM_THREADS;
+
+And then the thread will iterate until reaching the chunk dedicated to the thread with
+id + 1. Thus we have the condition i < lim where lim = (id + 1) * N / NUM_THREADS. We
+can now rewrite our general form of parallelizing a loop as
+
+#define NUM_THREADS 8
+omp_set_num_threads(NUM_THREADS)
+
+#pragma omp parallel
+{
+	int id = omp_get_thread_num();
+	int lim = (id + 1) * n / NUM_THREADS;	// Precalculate so it isn't calculated
+						// every loop iteration.
+
+	int i;
+	for(i = id * n / NUM_THREADS; i < lim; i++){
+		// PARALLELIZABLE CODE
+	}
+}
+
+I applied this model to func3 and instantly got a decrease in time to roughly a low .4 or
+high .3. Then I applied the model to the outer for loop of func1...
+
+
+...and instantly got a decrease in time to .09 seconds, a 5x increase in speed. I could
+finish right there and still land extra credit, but I wanted to continue on and optimize
+the rest of the functions. It is worth noting that the method above needs to be modified
+if there is an accumulator in the loop, because then there is a race condition of which
+thread will be modifying the accumulator. There are directives to handle it in OpenMP,
+but it was not very useful. Once again following some OpenMP slides, I decided to create
+an array of accumulators, were accum[id] is the accumulator dedicated to the the thread
+who's ID is id. The for loop would be modified to have a temporary accumulator, store it
+in accum[id], and then after all threads remerge the actually accumulated value would be
+calculated by summing over all of the elements in accum.
+
+
+======================================================================================
+LAST REMARKS
+======================================================================================
+
+One thing I was unsuccessful with completing is trying to get nested threads to work in
+func1. After an entire night (and morning) trying, I noticed that the code indeed did
+finish, but it was EXTREMELY slow. Even with 2 outer threads and 2 inner threads 
+(resulting in 4 total threads), the FUNC TIME actually increased. This is something I
+will look into in the future, but for the purposes of this project the speedup was
+achieved.
+
+======================================================================================
+RESULTS
+======================================================================================
+
+My final speedup is roughly .045 seconds, roughly a 11x speedup.
+
+This was achieved using Method 3.

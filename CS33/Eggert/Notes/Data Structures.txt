@@ -1,0 +1,64 @@
+Data Structures
+	Regular Expressions
+		(R)*		array of R's		R a[...]
+		(R)(S)(T)	struct of R, S, T	struct {
+								R x;
+								S y;
+								T z;
+							};
+		(R)|(S)|(T)	union of R, S, T	union {
+								R x;
+								S y;
+								T z;
+							};
+
+	Structs
+		struct { R x; S y; T z; };
+					T	S	R
+		|\\\\\\\|\\\\\\|	z|	y|	x|
+							(base)
+
+		Not that simple! ALIGNMENT REQUIREMENTS.
+
+		Alignment Requirements
+			Typically, for small stuff, alignment = size. (Not always the case, i.e. long doubles are 12 bytes but alignment is 4).
+
+			How do you know the alignment?
+			#include <stdalign.h> //provides function alignof(...)
+
+			Example
+				alignof(int) == 4; //True
+
+			There are other types of alignments, this is only the second.
+
+			1. x86-64 hw alignment for int
+			2. alignof(int) == 4
+			   alignof(double) == 4			//minimum alignment if you stick to safe C
+			3. __alignof__(int) == 4 (GCC)
+			   __alignof__(double) == 8		//Recommended value
+	
+	Union
+		union s {
+			int a;
+			char b;
+			long c;
+
+		}
+                 ---------c--------
+		        -----b-----
+			        -a-
+		|	|	| |
+
+	Arrays
+		alignof(R[]) == alignof(R)
+		sizeof(R[N]) == N * sizeof(R)
+
+	2D Arrays
+		long a[10][20]
+
+		a[0][0]		a[0][1]		a[0][2]
+		a[1][0] ...
+
+		&m[i][j] == &m[i] + j * sizeof(m[i])
+		&m[i] = m + i * sizeof(m[0]
+)

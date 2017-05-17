@@ -1,0 +1,102 @@
+3.67)
+
+A.
+
+ADDRESS		MEMORY
+1000	|
+	|
+  .	|
+  .	|
+  .	|
+	|
+	|
+920	|_______z_______
+  .	|
+  .	|
+  .	|
+	|
+912	|_______920_____
+  .	|
+  .	|
+  .	|
+	|
+904	|_______y_______
+  .	|
+  .	|
+  .	|
+	|
+896	|_______x_______
+
+B.
+It passes an address 64 bytes into the local stack frame, which the function 'process' will modify. 'eval' will
+use this space later, so 'process' will "return" by storing the structure in that stack frame.
+
+C.
+'process' accesses strA s by using the stack pointer to locate the elements of s. For instance, to find s.p, the
+assembly moves 24 bytes upwards from the stack pointer to get, at address 912 in this example, the address value 920. It has
+to move 24 bytes, as opposed to 16, because 'call process' adjusted the stack pointer to set up a new stack frame.
+
+D.
+'process' sets strB r by using the passed address in %rdi to start setting it up in the allocated 104 bytes that had been
+set up in the eval stack frame. It accesses the values in strA s as described in part C, and then sets these values into eval's stack frame
+using the passed location, 64 bytes above eval's %rsp.
+
+E.
+
+ADDRESS		MEMORY
+1000	|
+.	|
+.	|
+.	|
+976	|_______z_______
+.	|
+.	|
+.	|
+968	|_______x_______
+.	|
+.	|
+.	|
+960	|_______y_______
+  .	|
+  .	|
+  .	|
+	|
+	|
+920	|_______z_______
+  .	|
+  .	|
+  .	|
+	|
+912	|_______920_____
+  .	|
+  .	|
+  .	|
+	|
+904	|_______y_______
+  .	|
+  .	|
+  .	|
+	|
+896	|_______x_______
+
+F.
+It seems that for structures passed as arguments, the stack pointer can be used to access the data. Thus the argument is really pushed onto the stack,
+and then the callee will use the stack pointer to access that data. Additionally, the callee will return a structure by using the stack frame of the caller,
+and store the data of the returned structure there.
+
+3.70)
+A.
+
+e1.p		0 byte offset
+e1.y		8 byte offset
+e2.x		0 byte offset
+e2.next		8 byte offset
+
+B.
+The entire union takes 8 bytes, since both member variables take up 8 bytes total,
+and the unions size is the maximum size of its member variables.
+
+C.
+void proc (union ele *up){
+	up->e2.x = *(up->e2.next->e1.p) - up->e2.next->e1.y;
+}

@@ -1,0 +1,14 @@
+Threading and Concurrency
+	3 Major Ways to Control Concurrency
+		- Processes (different virtual machines, independent)
+		- Multiplexing (single core / single CPU)
+		- Multithreading (multiple cores, single virtual machine)
+
+	Why this Concurrency?
+		- Computation is N times faster, where N is the number of cores
+		- Access slow devices (including us!)
+		- defer work while busy (e.g. garbage collection while burst of requests)
+		- fair access from multiple clients (often competing with computation speed)
+
+	Threads
+		

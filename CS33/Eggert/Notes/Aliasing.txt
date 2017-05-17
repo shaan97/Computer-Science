@@ -1,0 +1,7 @@
+Aliasing and Reordering Instructions
+	Sometimes the compiler will choose to reorder machine instructions. This can be okay, so long as the behavior is the same.
+	
+	There can be issues (for example if you have two pointers, there can be trouble if they are equal to one another).
+
+GDB
+	

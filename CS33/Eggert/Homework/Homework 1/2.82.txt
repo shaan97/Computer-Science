@@ -1,0 +1,14 @@
+A. No. Let x = TMin and y = 0. x < y is true, while -x > -y is false since -y == 0 and -x == TMin.
+B.  Yes. A proof:
+    ((x+y)<<4) + y - x == 16*(x + y) + y - x == 17*y + 15*x
+C. Yes. A proof:
+   ~(x + y) + 1 = -(x + y)
+   ~(x + y) = -x - y - 1
+   ~(x + y) = ~x + 1 + ~y + 1 - 1
+   ~(x + y) = ~x + ~y + 1
+D. Yes. Despite the fact there is an unsigned cast, this just changes the interpretation of the bits. Thus:
+   (ux - uy) == - (unsigned) (y - x)
+   (ux - uy) == - (uy - ux)
+   (ux - uy) == (ux - uy)
+E. Yes. The arithmetic shift right twice and logical shift left twice will essentially make the last two bits 0, possibly reducing the original value if the 
+   last two bits had a 1. This value could not be greater than x, since it just clears the last two bits, not gaining it any value.
