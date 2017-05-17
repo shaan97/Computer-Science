@@ -1,0 +1,133 @@
+Strings
+	Text Data
+		C++ provides two core string datatypes: C-strings (A null-terminated array of char) and the string class
+	
+	CStrings
+		CStrings are arrays of characters that end with a null terminator character. The NULL character in the ASCII Table has value 0.
+		The '\0' character marks the end of the CString. We've already been working with CStrings. String literals, under the covers, 
+		are actually CStrings. CStrings are arrays of characters with an extra letter '\0'.
+
+		Example
+			char s[10];
+			char t[5] = "HI";	//t[0] = 'H', t[1] = 'I', t[2] = '\0'
+			char u[] = "Howie!";	//C++ creates the array for you with the proper size. Size is not required.
+
+		CounterIntuitive Examples
+			char v[] = "abc";	    //CString of size 4
+			char w[] = {'a', 'b', 'c'); //Not a CString, just a char array
+
+			char x[5];
+			x = "Foo";	//This is an assignment statement, not an initialization statement. It is illegal to assign a value to a CString!!! You CAN assign INDIVIDUAL characters
+
+		<cstring>
+			strcpy(TARGET_STRING_VAR, SRC_STRING)	basically using assignment statement
+			strcat(dest,src) =>	dest = dest + src
+			strlen(src) =>	length of cstring src
+			strcmp(s1,s2)	compares s1 and s2
+				returns 0 if equal
+				returns < 0 if u < v
+				returns > 0 if u > v
+	
+		<cstdlib>
+			atoi(src)	=>	ascii to integer
+			atof(src)	=>	ascii to floating-point
+			atol(src)	=>	ascii to long
+
+		CString Functions
+			strlen(str)	=> returns number of characters NOT INCLUDE NULL
+			
+		<cctype>
+			toupper( )
+			tolower( )
+
+		CStrings As Function Paramaters
+			Size companion parameter only needed if the string will get changed. It is an array so will be passed by reference.
+
+		Input
+			We have 2 choices:
+				1. Use >> with cin which eats leading whitespace and reads just a single word.
+				2. Use cin.getline which is the version that supports cstring data
+					cin.getline(char *, int)
+
+					char a[80];
+					cin.getline(a, 80);
+
+	string Class
+		A standard class from teh string library. + operator performs concatenation. Default and string argument constructor. Allows for character accessing using [].
+
+		Converting From string to cstring and Vice Versa
+			string s("Hello");
+			
+			char cstring[80];
+			cstring = s.c_str();
+
+			char cstring2[80] = "Happy Days Are Here Again!";
+			cout << strlen(cstring2) << endl; // Would print out 27, not 80!
+			string convertedString(cstring2);
+			cout << convertedString.size() << endl; //Would also print out 27!
+
+		
+File Streams
+	Streams are system classes that handle I/O. They require #include <fstream>
+
+	ifstream
+		void open(string)
+		bool fail()
+		void close()
+		bool eof()
+
+	ofstream
+		void open(string)
+		bool fail()
+		void close()
+		void precision(int)
+		void setf(int)
+			setf flags include	ios::fixed
+						ios::scientific
+						ios::showpoint
+						ios::showpos
+
+	#include <fstream>
+	
+	ifstream in_stream;
+	in_stream.open("file.dat");
+	if(in_stream.fail()){
+		in_stream >> var1 >> var2;
+	}
+
+	while(in_straem >> next){
+		...
+	}
+	while(!in_stream.eof()){
+		...
+	}
+	
+	in_stream.close();
+	
+	Streams HAVE TO BE PASSED BY REFERENCE.
+	
+	If your code fails, you often just want to quit.
+
+	#include <cstdlib>
+	exit(1); //denotes failure
+
+Classes Revisited
+	friend functions
+		friend function of a class is NOT a member function but has access to private members of that class. friend functions must be named inside the class definition.
+		friend functions are always public
+
+		class Number{
+			public:
+				...
+				friend Number add(Number left, Number right);
+			private:
+				...
+		};
+
+	Operators Revisited
+		Operator Overloading
+			All the operators you have learned about so far can be overloaded by class definitions.
+
+			//These are BINARY OPERATIONS. UNARY OPERATIONS are more along the lines of -5 or +3
+			friend Number operator +(const Number& left, const Number& right);
+			friend bool operator ==(const Number& left, const Number& right);

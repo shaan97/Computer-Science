@@ -1,0 +1,50 @@
+Arrays
+	We typically encounter groups of like minded objects. Each object in the set is the same. This overall set has a size.
+
+
+	Array Declaration
+		Syntax
+			type arrayname[ size ];
+			
+			Example
+				int grades[5];
+	
+		Size needs to be a constant integer. Variables cannot determine size of array -- must be predetermined at compile time.
+
+	Array Initialization
+		If you only initialize some elements, the rest will be initialized to 0 (or their equivalent for that particular type).
+		If you don't intiialize any element, garbage values will be there.
+
+	Array As Function Parameters
+		What is really passed? Think of array as three parts:
+			1. Address of first element arrName[0]
+			2. Array base type
+			3. size of array
+
+		Only first piece is passed!
+
+	Typical Array Operations
+		Searching and Sorting
+
+		#include <iostream>
+		using namespace std;
+		
+		const int DECLARED_SIZE = 20;
+		void fillArray(int a[]. int size, int& numberUsed);
+		int search(const int a[], int numberUsed, int target);
+
+
+Sorting
+	Selection Sort
+		Find smallest item and switch it with index 0.
+		Recurse.
+
+Libraries
+	<cctype> System Library
+		toupper(c)	return int <--- have to cast back to char
+		tolower(c)	return int <--- have to cast back to char
+		isupper(c)	return bool
+		islower(c)	return bool
+		isalpha(c)	return bool
+		isdigit(c)	return bool
+		isspace(c)	return bool

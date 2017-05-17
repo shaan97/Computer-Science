@@ -1,0 +1,187 @@
+STRUCTS, CLASSES, AND OBJECTS
+
+Structures
+	An "aggregate" data type. Combining together different types of data into a newly defined type.
+	Unlike an array we have to declare a struct before we use them.
+
+	#ifndef HEADER_H	//if not defined
+	#define HEADER_H	//define it
+	#include <iostream>
+	#include <string>
+	using namespace std;
+
+	//No memory allocated here
+	struct SuperbowlGame{
+		int mWhichOne;
+		string mAFCTeam;
+		string mNFCTeam;
+		string mWinner;
+	};
+
+	void updateWinner(SuperbowlGame & g);
+	void printGame(const SuperbowlGame & g);
+
+
+
+
+	#endif
+
+	int main(){
+		SuperbowlGame game = {50, "Broncos", "Panthers", ""};	//Actual allocation of memory happens here
+
+		game.mWhichOne = 50;
+		game.mAFCTeam = "Broncos";
+		game.mNFCTeam = "Panthers";
+		game.mWinner = "Broncos";
+
+		updateWinner(game);
+		printGame( game);
+		SuperbowlGame game49 = createBowl49();
+		printGame(game49);
+	}
+
+
+	#include
+		the #include directive does textual substitution. The line is read, stripped, and replaced by the header file in this instance.
+
+	A structure tells C++ what it "looks like". No memory is actually allocated until you declare a variable of that type. Every struct has 
+	a name and data member variables. Use . operator to access data fields. Variables can have the same name as the struct itself, though that
+	may lead to confusion.
+	
+		struct Date{
+			int month;
+			int day;
+			int year;
+		};
+		Date dueDate = {12, 31, 2003};
+
+	EVERYTHING IS PUBLIC IN A STRUCT
+
+Function Oriented Programming
+	Up until now, everything we have learned is closely related to C. Programs are collections of functiosn with controlling drivers. Program structure
+	decomposes program into discrete algorithms.
+
+OBJECT ORIENTED PROGRAMMING (OOP)
+	Objects
+		Objects have properties and functionality.
+
+	Classes
+		
+		#include <string>
+
+		//Gives us both data and operations together in a unit
+		//Operations tend to be marked public
+		//Data fields tend to be marked private
+
+		class Car{
+		
+			void foo();	//By default C++ makes this PRIVATE
+
+		private:		//Access Modifiers. Apply textual
+			string mMake;
+			string mModel;
+		public:			//Access Modifiers. Apply textual
+	
+			Car(string make, string model);	//constructor
+			Car();
+			void drive();
+			void honk();
+			void stop();
+
+		};
+		
+
+		//data: mMake, mModel	: string
+		//operations: things a Car knows "how to do"
+
+
+		//In .cpp file...
+		
+		#include "Car.h"
+
+		int main(){
+			Car c;
+			c.drive();
+			c.honk();
+			c.stop();
+
+
+		}
+
+		//In Car.cpp file...
+		
+		Car::Car( string make, string model ){
+			mMake = make;
+			mModel = model;
+		}
+
+		Car::Car(){
+			mMake = "";
+			mModel = "";
+		}
+		
+		void Car::drive(){
+
+		}
+
+		void Car::honk(){
+		
+		}
+
+		void Car::stop(){
+
+		}
+
+
+	const Methods in Classes
+		If you specify that a method is const, C++ knows that the object will not be changed. It will be considered READ ONLY.
+		This will speed up performance.
+		
+
+UML
+	A common way to illustrate a class in a table.
+
+		Student
+	mName: string
+	mID: string
+	----------------------------------------------
+	Student()
+	Student( name:string, id:string)
+	getName():string
+	setName(name:string):void
+	getID():string
+	setID(id:string):void
+
+
+	RandomNumber Class
+
+		RandomNumber
+	mMinimum : int
+	mMaximmum : int
+	----------------------------------------------
+	RandomNumber( min: int, max : int, minInclusive : bool = true, maxInclusive : bool = true )
+	random() : int
+
+Exception Handling
+	Try-Catch Block
+		Try a block of code, and handle particular kinds of exceptions in designated catch block.
+	
+			try{
+			
+				//try this code
+			}catch(Exception1 e){
+	
+			}catch(Exception2 e){
+
+			}catch(...){
+				//can catch anything
+			}
+
+	<stdexcept>
+		logic_error class takes a string and can be thrown as an exception. Driver code cannot continue unless the exception is caught.
+
+
+	Function Prototype throw clause
+		
+		void Car::drive();
+		void Car::drive() throw( OutOfGasError, FlatTireError, GeatFailed );	//REQUIRES DRIVER CODE TO CATCH THESE EXCEPTIONS

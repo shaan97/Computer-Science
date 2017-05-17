@@ -1,0 +1,278 @@
+Flow of Control
+	Precedence Rules
+		Operators in an expression are evaluated according to precedence rules
+			()
+			*,/,%
+			+, -
+			=, +=, *=, -=, /=, %=
+
+	Selective Control Flow in C++
+		Programs often choose between different instructions in a variety of situations
+			Sometimes code must be skipped.
+
+	The if Statement
+		if statements are guarded actions that uses a logical test (using booleans) to determine the consequential actions required.
+
+		if( x < y ){
+			cout << "x < y";
+		}
+	
+				-----true ===> {Block of C++ statements}---|
+		logical test ---|					   ------------------>
+				-----false---------------------------------|
+
+		Common Mistake
+			Assignment (=) is different from Equality (==)
+				if(salary = 100000)
+					cout << "You're fired!";
+
+			Equality is always dangerous when working with real operands. This code will always execute because nonzero values are true.
+
+		More Complex Expressions
+			Examples:
+				if(rate*balance > 1000)
+				if( a * b != c+d*e)
+
+	Logical Operators
+		&& means AND, || means OR, ! means NOT. For AND (&&) to be true, both sides must be true. For OR (||) to be true, either side, or both, may be true.
+		NOT (!) just reverses the boolean.
+
+		C++ uses short-circuit evaluation
+			The evaluation of conditions tops because the condition turns false (in case of &&) or true (in case of ||)
+
+	The if-else Statement
+		Provides an alternative action
+		
+		if(x < y)
+			x++;
+		else
+			y++;
+
+		
+				-----------true==>Any Block of C++ Statements------
+		logical test---|						   |---------->
+				-----------false==>Any Block of C++ Statements-----
+
+	Multiway if-else Statement
+		if(boolean statement)
+			statement;
+		else if(boolean statement)
+			statement;
+		.
+		.
+		.
+		else if(boolean statement)
+			statement;
+		else
+			statement;
+
+	Repetitive Control Flow in C++
+		Programs often must repeat different instructions in a variety of situations
+			Sometimes, code must be repeated a determinate number of times.
+			Other times, coe must be repeated an indeterminate number of times.
+
+	The while statement
+		Indeterminate Loop
+			Repeat while a condition is true.
+			
+			while(x < y){
+				cout << "x<y\n";
+				x++;
+			}
+
+
+				-----------true==>Any Block of C++ Statements--
+		logical test---| <--------------------------------------------|   |---------->
+				-----------false-----------------------------------
+
+
+	The do-while Statement
+		Indeterminate Loop
+
+		do{
+			cout << "x<y\n";
+			x++;
+		}while(x < y);
+
+				v-----------------------------true
+		Any Block of C++ Statements-----> logical test--|
+								false-------------->
+
+	The for Statement (Loop)
+		Determinate Loop
+			Do something exactly n Times
+
+	
+    		|-----Update Step<----------repeat part <-----------
+		|						   |
+	        ---------------------v			  	 true
+				initialization step --> Loop Test--|
+
+
+		for(int i = 0; i < n; i++){
+			cout << i << endl;
+		}
+
+	The switch Statement
+		switch(controlling_expression){
+			case Constant_1:	Statement_Sequence_1;
+						break;
+			case Constant_2:	Statement_Sequence_2;
+						break;
+				.
+				.
+				.
+			case Constant_n:	Statement_Sequence_n;
+						break;
+			default:		Default_statement_Sequence;
+		}
+
+
+Functions
+	Functions As "Black Boxes"
+		No one but the function's author needs to know what goes on inside (procedural abstraction).
+		As users, all we know is that the function accepts some kind of input and generates some kind of output.
+		We know WHAT it does, but not HOW it does it ("information hiding").
+	
+	Functions
+		A named subprogram that can take parameters and returns a result.
+			main() is a function that returns int
+
+	Predefined Fnctions
+		C++ Libraries offer us many functions
+			
+			sqrt	cmath
+			pow	cmath
+			abs	cstdlib
+			labs	cstdlib
+			fabs	cmath
+			ceil	cmath
+			floor	cmath
+			exit	cstdlib
+			rand	cstdlib
+			srand	cstdlib
+
+	Syntax of a Function Call
+		The call to a function call is a signature.
+		Syntax:
+			rv = funcname( [arg-list]);
+		where:
+			arg-list := argument[, argument]*
+			rv is the value returned by the function call.
+
+	Parameter Passing
+		Pass By Value
+			Caller must send an rvalue to the type required. What arrives in the callee function is a copy of the value sent.
+			Considered "very safe" because nothing the callee does changes the variable in any way. The only communication between the caller
+			and the callee is the return value.
+
+		Pass By Reference
+			void foo(int& i)
+				Will pass a reference to the function, which will allow the function to tamper with the original data.
+
+			Pass by reference is strict. int& i parameters take only ints. This is because int& asks for lvalues, not rvalues. Thus it has to be a
+			VARIABLE of the CORRECT TYPE.
+
+			void swap(int& i, int& x);
+
+			int main(){
+				swap(12, 13); // FAIL! CAN'T USE LITERALS WITH PASS BY REFERENCE
+				int i = 1, j = 2;
+				string n = "leedle", t = "laddle";
+				swap(i, j);
+				swap(i+1, j-1); //FAIL! THIS PASSES RVALUES
+				swap(n,t); //FAIL! NOT CORRECT TYPE
+			}
+
+
+			Caller must send an lvalue to the type required. What arrives truly what the caller sent: 'an alias' to what the caller sent. It is "very strict";
+			if you ask for an int, send an int. Output values from our functions......
+
+		Pass by Constant Reference
+			void printOutTheResult(const double& amount){
+				cout << "Blah Blah Blah:\t" << amount << endl;
+			}
+
+			This tells C++ to send the real value of amount and fix it as a constant.
+			
+			Caller must send an lvalue to the type required. What arrives is truly what the caller sent: 'an alias' for the exact thing that was sent.
+			"Very safe" computing because argument is "locked down". The argument cannot be found on the left-hand-side of an assignment statement.
+			Read-only value that cannot be change.
+
+		Optional Parameters
+			void bar(int i, int j = 12);		//Good practice: Put parameters with default values at the end
+
+			int main(){
+				int a = 1, b = 2;
+				bar(12);
+				bar(a, b);
+				bar(a);
+			}
+
+			void bar(int i, int j){
+				//Code
+			}
+
+			If bar(int,int) is invoked, j is an optional parameter that has a default value if it is not specified. 
+
+	Void Functions
+		void functions do not return any variables. 
+
+Program Incremental Development
+	Software engineers never write the entire program first and then try to test its operation. It's time consuming and hard!
+	
+	How to write better code faster:
+		1. Break down your program into logically distinct units
+		2. Test the operation of each unit separately (diagnostic messages)
+		3. Combine the units together
+		4. Test the whole thing (diagnostic messages)
+
+IEEE Floating Point Formats
+	A 32-Bit Floating Point Values has Three Components
+		1. A Sign Bit: High-Order Bit; Set to Represent a negative number.
+		2. The Exponent: Represents the Location of the Decimal Point (8 Bits/ 1 byte)
+		3. Actual numerical quantity (23 Bits for significant digits)
+
+
+
+Traversing strings
+	To get a Single Letter
+		char firstLetter = commandstring[i];
+	
+	To get the size/length
+		size_t length = commandstring.size();
+		size_t length = commandstring.length();
+
+	Walking through the entire string
+		for(size_t i = 0; i < commandstring.size(); i++){
+			char c = commandstring[i];
+			cout << c << endl;
+		}
+
+Assertion statements
+	
+	#include <cassert>
+
+	int main(){
+		assert( number("1912 Pico Boulevard", 0) == 1912 ); //If true, code just continues. If false, the program will stop and an error message will print.
+	}
+
+
+Introducing Regular Expressions
+	The Expression Language is made up of literal text and metacharacters
+		Understanding the power of metacharacters is key
+	
+	I'll describe just enough to handle our robot commands
+		Character matching syntax; quantifer syntax supports repetition
+
+	
+	Quantifier Syntax
+		Quanitifers specify reptition of characters or groups
+			+ means one or more
+			* means zero or more
+			? means zero or one
+
+Enumerated types are integral values
+
+
+

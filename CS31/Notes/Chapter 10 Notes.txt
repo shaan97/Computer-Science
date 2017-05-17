@@ -1,0 +1,156 @@
+Pointers
+	Pointers are a very important but hard to understand area of C++.
+
+	Revisiting LValues and RValues
+		C++ supports two kinds of expressions:
+			1. Lvalue - expressions which can be evaluated and modified.
+			2. Rvalue - expressions which can only be evaluated
+
+
+	LValue
+		An LValue actually refers to a location in memory. We conveniently refer it by name
+			int a  = 12;
+
+	Pointer Variables
+		A pointer variable contains the address of a variable
+			int a = 12;
+			int* intPtr;
+			intPtr = &a;
+
+		Once Declared, a pointer points to only a certain type of variable.
+
+
+	Pointer Dereferencing
+		The thing a pointer points to can be manipulated by the pointer variable
+			int a = 12;
+			int* intPtr;
+			intPtr = &a;
+			*intPtr = 5;
+
+
+
+	new Operators
+		Rather than assigning to existing variables, a pointer can be attached to dynamic variables using the new operator.
+
+			int* p1;
+			p1 = new int;
+			*p1 = 10;
+	
+	Pointer Arithmetic
+		Arrays
+			Arrays actually point at the 0th element in the array.
+		
+				int* p;
+				int array[5] = {1, 2, 3, 4, 5};
+				p = array;
+				cout << *p << endl; // prints 1
+				cout << array[1] << endl; // prints 2
+				cout << *(p + 1) << endl; // prints 2
+				p = p + 1;
+				p++;
+
+		Dynamic Array
+			int x;
+			cin >> x;
+	
+			int* pile2 = new int[x];
+			pile2[0];
+			pile2[1];
+			.
+			.
+			.
+			delete [] pile2; //If you "new it" with [], you have to delete it with []
+
+	The RAM in Your Computer
+		We are very spoiled, living in a world of lots of memory...
+		
+		Three sections: 
+			1. The Stack
+			2. The Heap
+			3. OS Reserved
+
+		The Stack is what we have been using all along. It holds call stack "activiation records" with all the declared "automatic" variables we have ever made.
+		The Heap is what were our dynamic variables are come from. Calls to new offer available memory from the Heap. Calls to delete return memory to the heap to be recycled.
+
+		void foo(int i){
+			int a = 12;
+			cout << i << a;
+		}
+
+		int main(){
+			int b = 15;
+			int i = 0;
+			foo(b);
+			return 0;
+		}
+	
+		Call Stack: C++ runtime bootup code, main() b:15 i:0 , foo(int):void i:15 a:12, 
+
+
+		Automatic variables you declare are managed by the compiler for you.
+
+		void foo(int i ){
+			int* a = new int(12);
+			cout << i << *a;
+		}
+	
+		int main(){
+			int b = 15;
+			int i = 0;
+			foo(b);
+			return 0;
+		}
+
+		The Stack: C++ Runtime Bootup Code, main() b:15 i:0, foo(int):void i:15 a:--v
+		The Heap:								    *a = 12
+
+		Dynamic variables are given an address at run-time. Dynamic variables come from the heap. Until you delete them, heap addresses are unvailable to any other process.
+
+	Introducing the Value nullptr
+		Recall when you declar ea pointer, it is initially unusuable...
+			int* ptrInt;			ptrInt --------> 0xcccccccc
+			ptrInt = nullptr;		ptrInt --------> nullptr
+			
+		A pointer to any type can be set to nullptr. Older C_++ code uses the value NULL
+
+		A nullptr value can be a guard you can check for
+			if(ptrInt != nullptr){
+				//don't use *ptrInt here
+			}else{
+	
+			}
+
+	Back to CStrings
+		char cstring[80];
+		strcpy(cstring, "Hello");		cstring---->{ 'H', 'e', 'l', 'l', 'o', '\0', ... }
+
+		Cstrings are null terminated array of chars. They are pointers!
+
+	Differences Between Pointers and Arrays
+		Arrays are pointer variables, but pointers can move while arrays cannot.
+			array1 = array2; //ILLEGAL STATEMENT. 
+
+		Arrays are FIXED arrows. 
+		Arrays are pointer variables that are fixed.
+
+	const Keyword
+		const int NUM = 5; //NUM has constant, fixed value 5.
+
+		void foo(const int& i);  //READ ONLY ARGUMENT. Parameter i is FIXED. const applies to int&
+
+		class Foo{
+		public:
+			int getFoo() const; //Does not allow changes to "this" Foo
+		}
+
+
+		What can we do with pointers? Well, we can mark either the ARROW const, or make the VALUE const.
+			int* const ptrI = &i; //Makes ARROW const
+			const int* ptrI = &i; //Makes VALUE const
+
+	Returning Arrays from a Function
+		You cannot return an array from a function
+			int[] some function(); // NOT LEGAL
+
+		But you can return an int* from a function, so long as you make sure the memory is stored on the heap, to avoid garbage collection.
+			int* someFunction(); 

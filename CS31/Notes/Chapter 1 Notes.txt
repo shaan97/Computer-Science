@@ -1,0 +1,120 @@
+Introduction to Computer Science I - CS31
+
+Computer Languages
+	Computer Languages have evolved over time. Initially, programmers wrote code in Machine Language (1's and 0's).
+	
+	High Level Languages
+		C++ is a "High-Level" Language, and with high-level languages, programmers write programs in a structure quite different from 
+		what the machine actually executes. Languages are interpreted or compiled. C++ is a compiled language.
+
+Origins of C++
+	Bjarne Stroustrup is the creator of C++. He formerly worked at AT&T. He extended the C Language, with support for object-oriented programming.
+	C++ is considered a superset of C. Language is now an international standard.
+		C++03: ISO Standard from 2003 (VS 2012)
+		C++11: ISO Standard from 2011
+
+Compiled Languages
+	Compiled languages must be turned into executable computer instructions.
+	
+	Source Code (.cpp) --> Preprocessor --> Object File (.o,.obj) --> Linker --> Executable (.exe,a.out)
+
+	Errors can occur at each step! (Compile-Time, linkage, run-time)
+
+Summarizing the HelloWorld program
+	A preprocessor handles lines with #. All C++ statements end with a ; . The main() function starts the program. Opening and Closing Braces define code blocks { }
+	cout and cin come from <iostream>. Comments can be single-line with // or extend over multiple lines with /* */
+
+	using namespace std tells the compiler that if it doesn't recognize something in the code, look at the std namespace to see if it can find it there.
+
+Input and Output in C++
+	C++ input statements
+		cin >> number;
+			a numerical value is extracted from the keyboard (cin) and is placed into the variable called "number".
+	C++ output statements
+		cout << "Hello";
+			send information from program to terminal screen (cout). double quotes "..." delimit a string. \n sends a new-line-character.
+
+Variables and Datatypes
+	Most programs manipulate variables. Variables are named memory locations, and must be declared.
+	
+	Datatypes			Description
+	int,short,long			Whole numbers
+	double				Decimal numbers
+	string				characters
+	bool				true or false
+	char				A single character
+
+
+	Type Name		Memory Used			Size Range					Precision
+	short/short int		2 bytes				-32,768 to 32,767				N/A
+	int			4 bytes				-2,147,483,648 to 2,147,483,6647		N/A
+	long/long int		4 bytes				''						N/A
+	float			4 bytes				approximately 1E-38 to 1E38			7 digits
+	double			8 bytes				approximately 1E-308 to 1E308			15 digits
+	long double		10 bytes			approximately
+	char			1 byte
+
+
+
+	Variables are known by name. Identifiers must:
+		1. begin with a-z, A-Z, or _
+		2. followed by a-z, A-Z, 0-9, or _
+
+	Identifier names are case-sensitive. It is always good practice to initialize variable values when they are declared.
+	Reserved keywords are as follows:
+		break	case	char	const	default
+		do	...
+
+	Literals
+		A fixed, static value used in a program. Called "literals" because you "literally typed" them into your program.
+		Three basic types: numeric, character, string
+	
+	Literals vs. Variables
+		A literal is a fixd value that never changes. A variable, on the other hand, is a container for values. A named value may change
+		through assignment statements (or other ways). A variable can only hold one value at a time, and loses its old value when a new one is
+		assigned. All variables must be declared before used.
+
+	Variable Declarations
+		Every variable in C++ must be declared. Normally occurs at the start of a main program. It associates a name with a datatype.
+		
+			type_name variable_name;		i.e. int i; or double d;
+
+	Variable Initialization
+		A variable has no meaningful value unless assigned. Set each variable before its value is used! It is garbage otherwise! (The container has
+		no predictable value). One way of avoiding unitialized variables: initialize at the time of declaration.
+
+	"Magic Formula" for 2 Digits after the Decimal
+		cout.setf(ios::fixed);
+		cout.setf(ios::showpoint);
+		cout.precision(2);
+
+	Constants
+		It's a good idea to name values to prevent "magic" values showing up in your code. Use const declaration to state that value cannot change after
+		assignment.
+			const double PI = 3.14159;
+			const int LIMIT = 15;
+
+		Constants are rvalues, so C++ just replaces all of the const variables with their specified values.
+
+	Type Compatibility
+		Generally you should not try storing values of one type in a variable of a different type (Type Mismatch Error).
+		You can COERCE types from one to another by saying:
+			double value(12.510104);
+			int i = static_cast<int>( value );
+
+		Need to be careful if you mix types and values on assignment statements or arithmetic expressions.
+
+	Division
+		When working with A / B, it's important to be aware of the operands. If one is a double, the resulting value will be a double. If both are integers,
+		the result will be an integer (decimal points will be truncated).
+
+****VPN
+	ssl.vpn.ucla.edu
+	ssh <user>@u.grad.seas.ucla.edu^C
+
+Demonstration of SEASNet - lnxsrv07.seas.ucla.edu lnxsrv09.seas.ucla.edu
+	- VPN
+	- Windows: use PuTTY****
+
+			
+
