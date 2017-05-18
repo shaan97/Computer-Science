@@ -13,3 +13,6 @@
 [submodule "CS35L"]
 	path = CS35L
 	url = https://github.com/shaan97/CS35L.git
+[submodule "CSM51A"]
+	path = CSM51A
+	url = https://github.com/shaan97/CSM51A.git
