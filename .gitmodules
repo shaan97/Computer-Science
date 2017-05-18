@@ -1,3 +1,6 @@
 [submodule "APCS"]
 	path = APCS
 	url = https://github.com/shaan97/APCS.git
+[submodule "CS31"]
+	path = CS31
+	url = https://github.com/shaan97/CS31.git
