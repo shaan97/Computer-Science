@@ -19,3 +19,7 @@
 [submodule "CS111"]
 	path = CS111
 	url = https://github.com/shaan97/CS111.git
+[submodule "CSM152A"]
+	path = CSM152A
+	url = https://github.com/shaan97/CSM152A.git
+
