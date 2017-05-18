@@ -1,6 +1,0 @@
-Sally	Data 1:	50.0	Average:	N/A
-John	Data 1:	40.0	Average:	45.0
-Clara	Data 1:	70.0	Average:	55.0
-Johnny	Data 1:	14.51	Average:	42.255
-Anthony	Data 1:	2394.234	Average:	1204.372
-Billie	Data 1:	2308234.23424	Average:	1155314.2341200002
