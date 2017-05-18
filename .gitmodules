@@ -4,3 +4,6 @@
 [submodule "CS31"]
 	path = CS31
 	url = https://github.com/shaan97/CS31.git
+[submodule "CS32"]
+	path = CS32
+	url = https://github.com/shaan97/CS32.git
