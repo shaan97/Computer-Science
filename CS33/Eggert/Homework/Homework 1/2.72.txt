@@ -1,9 +1,0 @@
-A. The conditional test always succeeds because sizeof(int) returns a size_t, which is unsigned. This causes the integer maxbytes to be cast into an unsigned
-integer. As a result, the difference between an unsigned integer and unsigned size_t will always be greater than or equal to 0, making the conditional statement always true.
-
-B. /* Copy integer into buffer if space is available */
-   /* WARNING: The following code is buggy */
-   void copy_int(int val, void *buf, int maxbytes) {
-      if ( maxbytes >= 0 && maxbytes >= sizeof(int) )
-         memcpy(buf, (void *) &val, sizeof(val));
-   }
