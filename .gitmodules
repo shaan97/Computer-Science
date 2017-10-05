@@ -23,3 +23,6 @@
 	path = CSM152A
 	url = https://github.com/shaan97/CSM152A.git
 
+[submodule "CS131"]
+	path = CS131
+	url = https://github.com/shaan97/CS131.git
